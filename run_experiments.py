@@ -94,22 +94,33 @@ def call_model_unified(prompt: str):
     )
     return resp.choices[0].message.content.strip()
 
+def build_few_shot_prompt(target_question, train_df, k=5):
+    # Sample k random examples from training data
+    examples = train_df.sample(k).to_dict("records")
+    
+    prompt = ANSWER_FORMAT_INSTRUCTION + "\n\n"
+    
+    # Append examples
+    for ex in examples:
+        prompt += f"問題：\n{ex['question']}\n\n答え：\n{ex['answer']}\n\n---\n\n"
+        
+    # Append the actual target question
+    prompt += f"問題：\n{target_question}"
+    return prompt
+
 # =========================
 # BASE VERIFICATION LOGIC
 # =========================
 
 def self_verify_answer(question: str, initial_answer: str, model: str) -> str:
     verify_prompt = f"""
-{ANSWER_FORMAT_INSTRUCTION}
+{VERIFICATION_PROMPT}
 
-以下はあなたの解答である：
-{initial_answer}
-
-この解答が問題文と照らして誤っている場合のみ、正しい解答に修正せよ。
-誤りがなければ、そのまま同じ解答を出力せよ。
-
-問題：
+【問題】
 {question}
+
+【あなたの解答】
+{initial_answer}
 """
     return call_model(verify_prompt, model)
 
@@ -286,7 +297,7 @@ experiments = {
         MODEL_BASE
     ),
     "few_shot": lambda r: call_model(
-        f"{ANSWER_FORMAT_INSTRUCTION}\n\n問題：\n{r.question}",
+        build_few_shot_prompt(r.question, train, k=FEW_SHOT_K), # Use the helper here
         MODEL_BASE
     ),
     "base_self_verify": base_self_verify_runner,
