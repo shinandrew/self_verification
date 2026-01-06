@@ -14,8 +14,8 @@ We utilize our newly constructed dataset, which faithfully replicates the origin
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/shinandrew/self_verification_jbe.git
-    cd self_verification_jbe
+    git clone https://github.com/shinandrew/self_verification.git
+    cd self_verification
     ```
 
 2.  **Install dependencies:**
@@ -45,7 +45,7 @@ python finetune.py
 
 Note: You will need the resulting Model ID (e.g., ft:gpt-4.1...) to update the configuration in run_experiments.py.
 
-### 2. Running Experiments (run_experiments.py)
+### 2. Running Experiments (`run_experiments.py`)
 This script evaluates various models and methods on the Reiwa 6 (R6) exam data (the test set). It combines the train and test splits from the Hugging Face dataset to ensure correct year-based filtering.
 
 The script runs the following experimental baselines:
