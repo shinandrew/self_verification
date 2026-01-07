@@ -19,6 +19,7 @@ RESULTS_PATH = "exam_predictions_merged.jsonl"
 
 LOG_EVERY = 10
 FEW_SHOT_K = 5
+TEMPERATURE = 0.4
 
 random.seed(42)
 
@@ -79,7 +80,7 @@ def call_model(prompt: str, model: str) -> str:
             {"role": "system", "content": "You are a Japanese law exam solver."},
             {"role": "user", "content": prompt}
         ],
-        temperature=0.0,
+        temperature=0.4,
     )
     return resp.choices[0].message.content.strip()
 
@@ -90,7 +91,7 @@ def call_model_unified(prompt: str):
             {"role": "system", "content": SYSTEM_PROMPT_UNIFIED},
             {"role": "user", "content": prompt},
         ],
-        temperature=0.4, 
+        temperature=TEMPERATURE, 
     )
     return resp.choices[0].message.content.strip()
 
