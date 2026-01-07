@@ -73,6 +73,7 @@ print(f"🚀 Starting fine-tuning job for model: {BASE_MODEL}...")
 job = client.fine_tuning.jobs.create(
     model=BASE_MODEL,
     training_file=training_file_id,
+    seed=820456509
 )
 
 job_id = job.id
