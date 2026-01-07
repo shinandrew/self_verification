@@ -1,6 +1,6 @@
 # Japanese Bar Exam LLM: Fine-Tuning & Self-Verification
 
-This repository contains the official code and experimental scripts for our paper: **[Self-Verification is All You Need to Pass the Japanese Bar Examination (TBA)]()**.
+This repository contains the official code and experimental scripts for our paper: **[Self-Verification is All You Need to Pass the Japanese Bar Examination](http://arxiv.org/abs/2601.03144)**.
 
 We present a method to achieve passing scores on the Japanese Bar Examination (Short-Answer Test / 短答式) using a fine-tuned GPT-4.1 model with a specialized self-verification mechanism, without altering the authentic question format.
 
