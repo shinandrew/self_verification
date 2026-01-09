@@ -49,7 +49,7 @@ ANSWER_FORMAT_INSTRUCTION = """
 # UNIFIED EXPERIMENT PROMPTS
 # =========================
 
-SYSTEM_PROMPT_UNIFIED = "あなたは日本の法律試験を解く受験者である。"
+SYSTEM_PROMPT = "あなたは日本の法律試験を解く受験者である。"
 
 VERIFICATION_PROMPT = """
 あなたは法律試験の答案を最終確認する役割である。
@@ -77,7 +77,7 @@ def call_model(prompt: str, model: str) -> str:
     resp = client.chat.completions.create(
         model=model,
         messages=[
-            {"role": "system", "content": "You are a Japanese law exam solver."},
+            {"role": "system", "content": "SYSTEM_PROMPT"},
             {"role": "user", "content": prompt}
         ],
         temperature=0.4,
@@ -88,7 +88,7 @@ def call_model_unified(prompt: str):
     resp = client.chat.completions.create(
         model=MODEL_FINETUNED,
         messages=[
-            {"role": "system", "content": SYSTEM_PROMPT_UNIFIED},
+            {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": prompt},
         ],
         temperature=TEMPERATURE, 
