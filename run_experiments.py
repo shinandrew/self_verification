@@ -77,7 +77,7 @@ def call_model(prompt: str, model: str) -> str:
     resp = client.chat.completions.create(
         model=model,
         messages=[
-            {"role": "system", "content": "SYSTEM_PROMPT"},
+            {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": prompt}
         ],
         temperature=0.4,
